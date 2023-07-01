@@ -34,7 +34,7 @@ def getUserId(username):
 
     print(userId)
     return userId
-    
+
 
 
 bot = commands.Bot(command_prefix=">", intents=discord.Intents.all())
@@ -65,17 +65,15 @@ async def gameunban(ctx, user):
     client = MongoClient(uri)
 
 
-    userid = getUserId(user)
-
     try:
         client.server_info()
         database = client['bandb']
         collection = database['users']
-        myquery = { "userid": userid}
+        myquery = { "username": user}
         collection.delete_one(myquery)
     finally:
         client.close()
-    await ctx.send(f'Removed {userid} from the ban database')
+    await ctx.send(f'Removed {user} from the ban database')
 
 
 bot.run(bottoken)
