@@ -39,6 +39,12 @@ const validateAPIKey = (req, res, next) => {
 
 
 
+app.get('/', async (req, res) => {
+  res.json({ Error: false });
+});
+
+
+
 app.get('/checkuser', validateAPIKey, async (req, res) => {
   const requestedUserId = req.query.userid;
 
